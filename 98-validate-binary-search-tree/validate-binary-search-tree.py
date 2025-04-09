@@ -7,15 +7,25 @@ class TreeNode:
 
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        def validate(node, min_val, max_val):
-            if not node:
-                return True
-            
-            # Check if current node's value is within the valid range
-            if node.val <= min_val or node.val >= max_val:
-                return False
-            
-            # Recurse: left subtree must be < node.val, right must be > node.val
-            return validate(node.left, min_val, node.val) and validate(node.right, node.val, max_val)
+        stack = []
+        prev = float('-inf')  # Track previous value in inorder traversal
+        curr = root
         
-        return validate(root, float('-inf'), float('inf'))
+        # Iterative inorder traversal
+        while curr or stack:
+            # Go to leftmost node
+            while curr:
+                stack.append(curr)
+                curr = curr.left
+            
+            # Process current node
+            curr = stack.pop()
+            # Check if current value is greater than previous
+            if curr.val <= prev:
+                return False
+            prev = curr.val
+            
+            # Move to right subtree
+            curr = curr.right
+        
+        return True
