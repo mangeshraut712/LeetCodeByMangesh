@@ -4,21 +4,28 @@ from typing import List
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         adj = collections.defaultdict(list)
-        in_degree = [0] * numCourses
-
         for course, prereq in prerequisites:
             adj[prereq].append(course)
-            in_degree[course] += 1
-
-        queue = collections.deque([i for i in range(numCourses) if in_degree[i] == 0])
-        courses_taken = 0
-
-        while queue:
-            prereq = queue.popleft()
-            courses_taken += 1
-            for course in adj[prereq]:
-                in_degree[course] -= 1
-                if in_degree[course] == 0:
-                    queue.append(course)
-
-        return courses_taken == numCourses
+        
+        # Track visiting state: 0 = unvisited, 1 = being visited, 2 = visited
+        visit = [0] * numCourses
+        
+        def dfs(course):
+            if visit[course] == 1:  # Cycle detected
+                return False
+            if visit[course] == 2:  # Already processed
+                return True
+            
+            visit[course] = 1  # Mark as being visited
+            for next_course in adj[course]:
+                if not dfs(next_course):
+                    return False
+            visit[course] = 2  # Mark as fully visited
+            return True
+        
+        # Check for cycles starting from each unvisited course
+        for course in range(numCourses):
+            if visit[course] == 0 and not dfs(course):
+                return False
+        
+        return True
