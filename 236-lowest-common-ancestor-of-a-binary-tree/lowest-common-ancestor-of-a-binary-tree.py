@@ -3,7 +3,7 @@ class Solution:
         if not root:
             return None
         
-        if root == p or root == q:
+        if root.val == p.val or root.val == q.val:
             return root
             
         left_lca = self.lowestCommonAncestor(root.left, p, q)
