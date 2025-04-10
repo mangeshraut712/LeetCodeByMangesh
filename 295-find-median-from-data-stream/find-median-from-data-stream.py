@@ -6,16 +6,11 @@ class MedianFinder:
         self.large_half_min_heap = []  # Min heap for larger half
 
     def addNum(self, num: int) -> None:
-        # Add to small half (max heap)
         heapq.heappush(self.small_half_max_heap, -num)
-        
-        # Ensure heap property: all elements in large half >= all elements in small half
         if (self.small_half_max_heap and self.large_half_min_heap and
                 (-self.small_half_max_heap[0]) > self.large_half_min_heap[0]):
             val = -heapq.heappop(self.small_half_max_heap)
             heapq.heappush(self.large_half_min_heap, val)
-
-        # Balance sizes: small_half should have N or N+1 elements
         if len(self.small_half_max_heap) > len(self.large_half_min_heap) + 1:
             val = -heapq.heappop(self.small_half_max_heap)
             heapq.heappush(self.large_half_min_heap, val)
