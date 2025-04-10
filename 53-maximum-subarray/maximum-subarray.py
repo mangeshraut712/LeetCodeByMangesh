@@ -1,11 +1,7 @@
 from typing import List
-import math
 
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        if not nums:
-            return 0 # Or handle as per constraints/edge case definition
-            
         current_max_sum = nums[0]
         global_max_sum = nums[0]
         
