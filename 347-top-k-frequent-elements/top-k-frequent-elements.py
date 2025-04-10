@@ -1,20 +1,18 @@
 import collections
+import heapq
 from typing import List
 
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        # Step 1: Count frequencies
         count = collections.Counter(nums)
-        n = len(nums)
-        buckets = [[] for _ in range(n + 1)]
-
+        
+        # Step 2: Use a min-heap to keep the top k elements
+        heap = []
         for num, freq in count.items():
-            buckets[freq].append(num)
-            
-        result = []
-        for i in range(n, 0, -1):
-            if buckets[i]:
-                result.extend(buckets[i])
-            if len(result) >= k:
-                break
-                
-        return result[:k]
+            heapq.heappush(heap, (freq, num))
+            if len(heap) > k:
+                heapq.heappop(heap)
+        
+        # Step 3: Extract the numbers from the heap
+        return [num for _, num in heap]
