@@ -1,34 +1,29 @@
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
         m, n = len(s), len(p)
-        dp = [[False] * (n + 1) for _ in range(m + 1)]
+        memo = {}
         
-        dp[0][0] = True
+        def dp(i: int, j: int) -> bool:
+            if (i, j) in memo:
+                return memo[(i, j)]
+            
+            # Base cases
+            if j == n:
+                return i == m
+            if i > m:
+                return False
+            
+            # First characters match
+            first_match = i < m and (p[j] == s[i] or p[j] == '.')
+            
+            if j + 1 < n and p[j + 1] == '*':
+                # '*' can match zero or one/more
+                result = (dp(i, j + 2) or  # Zero match
+                         (first_match and dp(i + 1, j)))  # One or more match
+            else:
+                result = first_match and dp(i + 1, j + 1)
+            
+            memo[(i, j)] = result
+            return result
         
-        for j in range(1, n + 1):
-            if p[j - 1] == '*':
-                dp[0][j] = dp[0][j - 2]
-                
-        for i in range(1, m + 1):
-            for j in range(1, n + 1):
-                s_char = s[i - 1]
-                p_char = p[j - 1]
-                
-                if p_char == '.' or p_char == s_char:
-                    dp[i][j] = dp[i - 1][j - 1]
-                elif p_char == '*':
-                    # '*' matches zero preceding element
-                    zero_match = dp[i][j - 2] 
-                    
-                    # '*' matches one or more preceding element
-                    one_or_more_match = False
-                    preceding_char = p[j - 2]
-                    if preceding_char == '.' or preceding_char == s_char:
-                        one_or_more_match = dp[i - 1][j]
-                        
-                    dp[i][j] = zero_match or one_or_more_match
-                else:
-                    # Character mismatch
-                    dp[i][j] = False
-                    
-        return dp[m][n]
+        return dp(0, 0)
