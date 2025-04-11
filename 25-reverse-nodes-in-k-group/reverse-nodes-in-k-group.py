@@ -3,26 +3,28 @@ class Solution:
         if not head or k == 1:
             return head
 
-        # Count k nodes
-        count = 0
-        curr = head
-        while curr and count < k:
-            curr = curr.next
-            count += 1
+        dummy = ListNode(0)
+        dummy.next = head
+        prev_group_tail = dummy
         
-        if count < k:
-            return head
-        
-        # Reverse the next group recursively
-        new_head = self.reverseKGroup(curr, k)
-        
-        # Reverse current group
-        prev = new_head
-        curr = head
-        for _ in range(k):
-            temp_next = curr.next
-            curr.next = prev
-            prev = curr
-            curr = temp_next
-        
-        return prev
+        while True:
+            kth_node = prev_group_tail
+            for _ in range(k):
+                kth_node = kth_node.next
+                if not kth_node:
+                    return dummy.next
+
+            next_group_head = kth_node.next
+            group_head = prev_group_tail.next
+            
+            prev = next_group_head
+            curr = group_head
+            while curr != next_group_head:
+                temp_next = curr.next
+                curr.next = prev
+                prev = curr
+                curr = temp_next
+                
+            prev_group_tail.next = prev
+            group_head.next = next_group_head
+            prev_group_tail = group_head
