@@ -6,35 +6,28 @@ class Solution:
         for r, c in mines:
             grid[r][c] = 0
 
-        # dp[r][c] will store the minimum of the lengths of consecutive 1s
-        # extending up, down, left, and right from grid[r][c].
-        # This minimum value is the order of the largest plus sign centered at (r, c).
-        dp = [[0] * n for _ in range(n)]
-
-        # Calculate lengths of consecutive 1s upwards and leftwards
-        up = [[0] * n for _ in range(n)]
         left = [[0] * n for _ in range(n)]
-        for r in range(n):
-            for c in range(n):
-                if grid[r][c] == 1:
-                    up[r][c] = (up[r-1][c] + 1) if r > 0 else 1
-                    left[r][c] = (left[r][c-1] + 1) if c > 0 else 1
-
-        # Calculate lengths of consecutive 1s downwards and rightwards
-        down = [[0] * n for _ in range(n)]
         right = [[0] * n for _ in range(n)]
-        for r in range(n - 1, -1, -1):
-            for c in range(n - 1, -1, -1):
-                if grid[r][c] == 1:
-                    down[r][c] = (down[r+1][c] + 1) if r < n - 1 else 1
-                    right[r][c] = (right[r][c+1] + 1) if c < n - 1 else 1
+        up = [[0] * n for _ in range(n)]
+        down = [[0] * n for _ in range(n)]
+
+        for i in range(n):
+            for j in range(n):
+                if grid[i][j]:
+                    left[i][j] = (left[i][j - 1] if j > 0 else 0) + 1
+                    up[i][j] = (up[i - 1][j] if i > 0 else 0) + 1
+
+        for i in reversed(range(n)):
+            for j in reversed(range(n)):
+                if grid[i][j]:
+                    right[i][j] = (right[i][j + 1] if j < n - 1 else 0) + 1
+                    down[i][j] = (down[i + 1][j] if i < n - 1 else 0) + 1
 
         max_order = 0
-        for r in range(n):
-            for c in range(n):
-                # The order of the plus sign centered at (r, c) is limited by the shortest arm
-                order = min(up[r][c], down[r][c], left[r][c], right[r][c])
-                dp[r][c] = order # Store this for clarity, although not strictly needed for the final answer
-                max_order = max(max_order, order)
+        for i in range(n):
+            for j in range(n):
+                if grid[i][j]:
+                    order = min(up[i][j], down[i][j], left[i][j], right[i][j])
+                    max_order = max(max_order, order)
 
         return max_order
