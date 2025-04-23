@@ -11,36 +11,11 @@ class Solution:
         Returns:
             The number of groups that have the largest size.
         """
-        def sum_digits(num):
-            """
-            Calculates the sum of the digits of a given integer.
-            """
-            s = 0
-            while num > 0:
-                s += num % 10
-                num //= 10
-            return s
+        def sum_digits(num: int) -> int:
+            """ Helper function to calculate the sum of digits of a number """
+            return sum(int(d) for d in str(num))
 
-        # Use a Counter to store the frequency of each digit sum
-        group_counts = Counter()
+        group_counts = Counter(sum_digits(i) for i in range(1, n + 1))
 
-        # Iterate through numbers from 1 to n
-        for i in range(1, n + 1):
-            digit_sum = sum_digits(i)
-            group_counts[digit_sum] += 1
-
-        # Find the maximum group size
-        if not group_counts:
-            return 0 # Should not happen based on constraints (n >= 1)
-            
-        max_group_size = 0
-        for count in group_counts.values():
-             max_group_size = max(max_group_size, count)
-
-        # Count how many groups have the maximum size
-        count_largest_groups = 0
-        for count in group_counts.values():
-            if count == max_group_size:
-                count_largest_groups += 1
-
-        return count_largest_groups
+        max_group_size = max(group_counts.values())
+        return sum(1 for count in group_counts.values() if count == max_group_size)
