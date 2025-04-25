@@ -1,29 +1,30 @@
 from typing import List
-from collections import deque
 
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         if not grid or not grid[0]:
             return 0
-        
-        rows, cols = len(grid), len(grid[0])
-        island_count = 0
-        directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
-        
-        for r in range(rows):
-            for c in range(cols):
+
+        m = len(grid)
+        n = len(grid[0])
+        num_islands = 0
+
+        def dfs(r, c):
+            if r < 0 or r >= m or c < 0 or c >= n or grid[r][c] == '0':
+                return
+
+            grid[r][c] = '0' # Mark as visited
+
+            # Explore neighbors
+            dfs(r + 1, c)
+            dfs(r - 1, c)
+            dfs(r, c + 1)
+            dfs(r, c - 1)
+
+        for r in range(m):
+            for c in range(n):
                 if grid[r][c] == '1':
-                    island_count += 1
-                    queue = deque([(r, c)])
-                    grid[r][c] = '0'  # Mark as visited
-                    
-                    # BFS to explore the island
-                    while queue:
-                        row, col = queue.popleft()
-                        for dr, dc in directions:
-                            new_r, new_c = row + dr, col + dc
-                            if 0 <= new_r < rows and 0 <= new_c < cols and grid[new_r][new_c] == '1':
-                                queue.append((new_r, new_c))
-                                grid[new_r][new_c] = '0'
-        
-        return island_count
+                    num_islands += 1
+                    dfs(r, c)
+
+        return num_islands
