@@ -20,8 +20,7 @@ class Solution:
         for i in range(n):
             while stack and nums_prime_scores[stack[-1]] < nums_prime_scores[i]:
                 stack.pop()
-            if stack:
-                left_boundary[i] = stack[-1]
+            left_boundary[i] = stack[-1] if stack else -1
             stack.append(i)
 
         right_boundary = [n] * n
@@ -29,8 +28,7 @@ class Solution:
         for i in range(n - 1, -1, -1):
             while stack and nums_prime_scores[stack[-1]] <= nums_prime_scores[i]:
                 stack.pop()
-            if stack:
-                right_boundary[i] = stack[-1]
+            right_boundary[i] = stack[-1] if stack else n
             stack.append(i)
 
         opportunities = []
