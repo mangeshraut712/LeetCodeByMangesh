@@ -1,57 +1,33 @@
-import sys
-from math import log2
-from math import comb
+import math
 
 class Solution:
-    MOD = 10**9 + 7
-
     def idealArrays(self, n: int, maxValue: int) -> int:
-        # Sieve of Eratosthenes to find the smallest prime divisor for each number up to maxValue.
-        # This is used for efficient prime factorization.
-        mind = [0] * (maxValue + 1)
-        for p in range(2, maxValue + 1):
-            if mind[p] == 0: # If p is prime
-                for i in range(p, maxValue + 1, p):
-                    if mind[i] == 0: # If mind[i] is not set yet, set it to the smallest prime factor p
-                        mind[i] = p
-
-        # Precompute binomial coefficients C(n + k - 1, k) modulo MOD.
-        # C(n + k - 1, k) represents the number of ways to distribute k identical items into n distinct bins.
-        # In this problem, it counts the number of ways to distribute k factors of a prime
-        # across the n positions in the ideal array's factorization.
-        # The maximum exponent of any prime in maxValue determines the necessary size of this precomputation.
-        # log2(maxValue) gives an upper bound on the maximum exponent.
-        maxPow = int(log2(maxValue)) + 1
-        C = [1] * (maxPow + 1)
-        for i in range(1, maxPow + 1):
-            # C(n + i - 1, i) = (n + i - 1)! / (i! * (n - 1)!)
-            # We compute this iteratively and modulo MOD
-            # C(N, k) = C(N, k-1) * (N - k + 1) / k
-            # C(n + i - 1, i) = C(n + i - 2, i - 1) * (n + i - 1) / i
-            # Using modular inverse for division
-            C[i] = (C[i-1] * (n + i - 1) * pow(i, self.MOD - 2, self.MOD)) % self.MOD
-
-
-        # The total number of ideal arrays is the sum over all possible values V for the last element (arr[n-1]).
-        # For a fixed V, the number of ideal arrays ending with V is the number of ways to factor V
-        # into n ordered factors (a_0, b_1, ..., b_{n-1} where V = a_0 * b_1 * ... * b_{n-1}).
-        # If V = p1^e1 * p2^e2 * ..., the number of ways to factor V into n ordered factors is
-        # C(e1 + n - 1, n - 1) * C(e2 + n - 1, n - 1) * ...
-        # This is equivalent to distributing the e_j factors of each prime p_j into n bins.
+        mod = 10**9 + 7
+        mv = maxValue
+        mind = list(range(mv+1))
+        mind[0] = mind[1] = 1
+        r = int(mv**0.5)
+        for i in range(2, r+1):
+            if mind[i] == i:
+                for j in range(i*i, mv+1, i):
+                    if mind[j] == j:
+                        mind[j] = i
+        L = mv.bit_length()
+        inv = [1] * (L+1)
+        for i in range(2, L+1):
+            inv[i] = mod - (mod//i) * inv[mod % i] % mod
+        C = [1] * (L+1)
+        for k in range(1, L+1):
+            C[k] = C[k-1] * (n+k-1) % mod * inv[k] % mod
         ans = 0
-        for i in range(1, maxValue + 1): # Iterate through all possible values for the last element
-            x = i
-            prod = 1 # This will store the product of C terms for the prime factorization of i
+        for v in range(1, mv+1):
+            x = v
+            res = 1
             while x > 1:
-                p = mind[x] # Smallest prime factor of x
-                exp = 0 # Exponent of prime p in the factorization of x
+                p = mind[x]; e = 0
                 while x % p == 0:
-                    x //= p
-                    exp += 1
-                # Multiply the product by C(n + exp - 1, exp) modulo MOD
-                prod = (prod * C[exp]) % self.MOD
-
-            # Add the number of ideal arrays ending with value i to the total count
-            ans = (ans + prod) % self.MOD
-
+                    x //= p; e += 1
+                res = res * C[e] % mod
+            ans += res
+            if ans >= mod: ans -= mod
         return ans
