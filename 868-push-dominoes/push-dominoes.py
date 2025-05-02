@@ -4,35 +4,48 @@ from collections import deque
 class Solution:
     def pushDominoes(self, dominoes: str) -> str:
         n = len(dominoes)
-        result = list(dominoes)
+        state = [(-1, None) for _ in range(n)]
+        q = deque()
 
-        forces_from_R = [float('inf')] * n
-        current_force_R = float('inf')
         for i in range(n):
-            if dominoes[i] == 'R':
-                current_force_R = 0
-            elif dominoes[i] == 'L':
-                current_force_R = float('inf')
-            elif current_force_R != float('inf'):
-                current_force_R += 1
-            forces_from_R[i] = current_force_R
-
-        forces_from_L = [float('inf')] * n
-        current_force_L = float('inf')
-        for i in range(n - 1, -1, -1):
             if dominoes[i] == 'L':
-                current_force_L = 0
+                state[i] = (0, 'L')
+                q.append(i)
             elif dominoes[i] == 'R':
-                current_force_L = float('inf')
-            elif current_force_L != float('inf'):
-                current_force_L += 1
-            forces_from_L[i] = current_force_L
+                state[i] = (0, 'R')
+                q.append(i)
 
-        for i in range(n):
-            if dominoes[i] == '.':
-                if forces_from_R[i] < forces_from_L[i]:
-                    result[i] = 'R'
-                elif forces_from_L[i] < forces_from_R[i]:
-                    result[i] = 'L'
+        while q:
+            current_idx = q.popleft()
+            current_time, current_direction = state[current_idx]
 
-        return "".join(result)
+            if current_direction == 'R':
+                next_idx = current_idx + 1
+                if next_idx < n:
+                    next_time, next_direction = state[next_idx]
+                    if next_time == -1:
+                        state[next_idx] = (current_time + 1, 'R')
+                        q.append(next_idx)
+                    elif next_time == current_time + 1:
+                        if next_direction == 'L':
+                            state[next_idx] = (current_time + 1, '.')
+
+            elif current_direction == 'L':
+                next_idx = current_idx - 1
+                if next_idx >= 0:
+                    next_time, next_direction = state[next_idx]
+                    if next_time == -1:
+                        state[next_idx] = (current_time + 1, 'L')
+                        q.append(next_idx)
+                    elif next_time == current_time + 1:
+                        if next_direction == 'R':
+                            state[next_idx] = (current_time + 1, '.')
+
+        final_dominoes = []
+        for _, direction in state:
+            if direction is None or direction == '.':
+                final_dominoes.append('.')
+            else:
+                final_dominoes.append(direction)
+
+        return "".join(final_dominoes)
