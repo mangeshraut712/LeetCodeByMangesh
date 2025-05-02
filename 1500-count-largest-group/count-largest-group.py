@@ -1,21 +1,20 @@
-from collections import Counter
+from collections import defaultdict
 
 class Solution:
     def countLargestGroup(self, n: int) -> int:
-        """
-        Counts the number of groups with the largest size based on the sum of digits.
+        freq = defaultdict(int)
 
-        Args:
-            n: The upper limit of the integers to consider (from 1 to n).
+        for i in range(1, n + 1):
+            digit_sum = sum(int(digit) for digit in str(i))
+            freq[digit_sum] += 1
 
-        Returns:
-            The number of groups that have the largest size.
-        """
-        def sum_digits(num: int) -> int:
-            """ Helper function to calculate the sum of digits of a number """
-            return sum(int(d) for d in str(num))
+        max_freq = 0
+        if freq: # Handle case where n=0, though constraints say n>=1
+            max_freq = max(freq.values())
 
-        group_counts = Counter(sum_digits(i) for i in range(1, n + 1))
+        count = 0
+        for group_size in freq.values():
+            if group_size == max_freq:
+                count += 1
 
-        max_group_size = max(group_counts.values())
-        return sum(1 for count in group_counts.values() if count == max_group_size)
+        return count
