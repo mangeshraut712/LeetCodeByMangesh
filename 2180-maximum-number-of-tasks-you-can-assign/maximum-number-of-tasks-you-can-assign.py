@@ -1,50 +1,50 @@
-from bisect import bisect_left
-from typing import List
+from collections import deque
 
 class Solution:
-    def maxTaskAssign(self, tasks: List[int], workers: List[int], pills: int, strength: int) -> int:
-        tasks.sort()
-        workers.sort()
+    def maxTaskAssign(self, tasks, workers, pills, strength):
+        tasks.sort()                  # ascending
+        workers.sort(reverse=True)    # descending
         n, m = len(tasks), len(workers)
 
-        def can_assign(k: int) -> bool:
-            """
-            Return True if we can assign the k easiest tasks (tasks[0..k-1])
-            to the k strongest workers (workers[m-k..m-1]) using ≤ pills boosts.
-            """
-            if k == 0:
-                return True
+        # bind to locals to avoid global lookups inside ok()
+        ts, ws, p, s = tasks, workers, pills, strength
+        deq = deque()
 
-            # Take the k smallest tasks, and the k largest workers
-            T = tasks[:k]            # sorted ascending
-            W = workers[m-k:]        # sorted ascending
-            rem = pills
+        def ok(k):
+            """
+            Can we assign the k easiest tasks (ts[0..k-1]) to
+            the k strongest workers (ws[0..k-1]) using ≤ p pills?
+            """
+            deq.clear()
+            rem, wi = p, 0
+            # assign from hardest→easiest among those k tasks
+            for ti in range(k - 1, -1, -1):
+                req = ts[ti]
+                # pull in every worker who, with a pill, could do this task
+                while wi < m and ws[wi] + s >= req:
+                    deq.append(ws[wi])
+                    wi += 1
 
-            # Try to assign from hardest→easiest
-            for req in reversed(T):
-                # 1) If our strongest remaining worker can do it unaided, use them.
-                if W and W[-1] >= req:
-                    W.pop()
-                else:
-                    # 2) Otherwise we must use a pill.
-                    if rem == 0:
-                        return False
-                    # Find the *smallest* w in W s.t. w + strength >= req
-                    need = req - strength
-                    i = bisect_left(W, need)
-                    if i == len(W):
-                        return False
-                    # Use that worker with a pill
-                    W.pop(i)
+                if not deq:
+                    return False
+
+                # if the weakest candidate can do it unaided, use them
+                if deq[0] >= req:
+                    deq.popleft()
+                # otherwise boost the strongest candidate
+                elif rem:
+                    deq.pop()
                     rem -= 1
+                else:
+                    return False
 
             return True
 
-        # Binary‑search the max k ∈ [0, min(n,m)] we can assign
+        # binary‐search on k = #tasks
         lo, hi, ans = 0, min(n, m), 0
         while lo <= hi:
-            mid = (lo + hi) // 2
-            if can_assign(mid):
+            mid = (lo + hi) >> 1
+            if ok(mid):
                 ans = mid
                 lo = mid + 1
             else:
