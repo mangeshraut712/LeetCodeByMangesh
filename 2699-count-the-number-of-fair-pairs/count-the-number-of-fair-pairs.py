@@ -1,12 +1,25 @@
 class Solution:
     def countFairPairs(self, nums, lower, upper):
         nums.sort()
-        def f(t):
-            cnt,l,r=0,0,len(nums)-1
-            while l<r:
-                if nums[l]+nums[r]<=t:
-                    cnt+=r-l; l+=1
-                else:
-                    r-=1
-            return cnt
-        return f(upper)-f(lower-1)
+        A = nums
+        lo = lower - 1
+        hi = upper
+        n = len(A)
+        ans_hi = ans_lo = 0
+        l = 0; r = n - 1
+        while l < r:
+            s = A[l] + A[r]
+            if s <= hi:
+                ans_hi += r - l
+                l += 1
+            else:
+                r -= 1
+        l = 0; r = n - 1
+        while l < r:
+            s = A[l] + A[r]
+            if s <= lo:
+                ans_lo += r - l
+                l += 1
+            else:
+                r -= 1
+        return ans_hi - ans_lo
