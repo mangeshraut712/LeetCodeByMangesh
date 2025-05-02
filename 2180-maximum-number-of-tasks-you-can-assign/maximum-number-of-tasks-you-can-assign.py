@@ -1,54 +1,49 @@
+from bisect import bisect_left
 from typing import List
-from collections import deque
 
 class Solution:
     def maxTaskAssign(self, tasks: List[int], workers: List[int], pills: int, strength: int) -> int:
         tasks.sort()
-        workers.sort(reverse=True)
-
-        n = len(tasks)
-        m = len(workers)
-
+        workers.sort()
+        
         def can_assign(k: int) -> bool:
+            # Try to assign the k smallest tasks to the k strongest workers.
             if k == 0:
                 return True
-
-            task_idx = k - 1
-            worker_idx = 0
-            remaining_pills = pills
-            pill_candidates = deque()
-
-            while task_idx >= 0:
-                current_task_req = tasks[task_idx]
-
-                while worker_idx < m and workers[worker_idx] + strength >= current_task_req:
-                    pill_candidates.append(workers[worker_idx])
-                    worker_idx += 1
-
-                if not pill_candidates:
-                    return False
-
-                if pill_candidates[0] >= current_task_req:
-                    pill_candidates.popleft()
-                elif remaining_pills > 0:
-                    pill_candidates.pop()
-                    remaining_pills -= 1
+            
+            T = tasks[:k]               # smallest k tasks, sorted
+            W = workers[-k:]            # strongest k workers, sorted
+            rem_pills = pills
+            
+            # Process tasks from largest to smallest
+            for t in reversed(T):
+                # 1) If our strongest worker can do it unaided, use them.
+                if W and W[-1] >= t:
+                    W.pop()
                 else:
-                    return False
-
-                task_idx -= 1
-
+                    # 2) Otherwise we must use a pill.  Find the smallest w s.t. w+strength >= t
+                    if rem_pills == 0:
+                        return False
+                    need = t - strength
+                    # lower_bound on W
+                    i = bisect_left(W, need)
+                    if i == len(W):
+                        return False
+                    # give the pill to W[i]
+                    W.pop(i)
+                    rem_pills -= 1
+            
             return True
-
-        left, right = 0, min(n, m)
-        best = 0
-
-        while left <= right:
-            mid = (left + right) // 2
+        
+        # Binary‑search the maximum k we can feasibly assign
+        lo, hi = 0, min(len(tasks), len(workers))
+        ans = 0
+        while lo <= hi:
+            mid = (lo + hi) // 2
             if can_assign(mid):
-                best = mid
-                left = mid + 1
+                ans = mid
+                lo = mid + 1
             else:
-                right = mid - 1
-
-        return best
+                hi = mid - 1
+        
+        return ans
