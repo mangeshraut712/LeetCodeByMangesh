@@ -1,13 +1,22 @@
 import random
+from typing import Optional
+
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 class Solution:
-    def __init__(self, head):
-        self.h, self.rr = head, random.randrange
+    def __init__(self, head: Optional[ListNode]):
+        self.head = head
 
-    def getRandom(self):
-        node, ans, i = self.h, 0, 1
+    def getRandom(self) -> int:
+        node = self.head
+        ans = 0
+        i = 1
         while node:
-            if self.rr(i) == 0:
+            if random.randrange(i) == 0:
                 ans = node.val
             node = node.next
             i += 1
