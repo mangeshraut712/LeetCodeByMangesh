@@ -1,11 +1,16 @@
 import random
-from collections import defaultdict
 
 class Solution:
     def __init__(self, nums):
-        self.d = defaultdict(list)
+        d = {}
         for i, x in enumerate(nums):
-            self.d[x].append(i)
+            if x in d:
+                d[x].append(i)
+            else:
+                d[x] = [i]
+        self.d = d
+        self.rr = random.randrange
 
     def pick(self, t):
-        return random.choice(self.d[t])
+        lst = self.d[t]
+        return lst[self.rr(len(lst))]
