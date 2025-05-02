@@ -5,39 +5,43 @@ class Solution:
     def maxTaskAssign(self, tasks: List[int], workers: List[int], pills: int, strength: int) -> int:
         tasks.sort()
         workers.sort()
-        
+        n, m = len(tasks), len(workers)
+
         def can_assign(k: int) -> bool:
-            # Try to assign the k smallest tasks to the k strongest workers.
+            """
+            Return True if we can assign the k easiest tasks (tasks[0..k-1])
+            to the k strongest workers (workers[m-k..m-1]) using ≤ pills boosts.
+            """
             if k == 0:
                 return True
-            
-            T = tasks[:k]               # smallest k tasks, sorted
-            W = workers[-k:]            # strongest k workers, sorted
-            rem_pills = pills
-            
-            # Process tasks from largest to smallest
-            for t in reversed(T):
-                # 1) If our strongest worker can do it unaided, use them.
-                if W and W[-1] >= t:
+
+            # Take the k smallest tasks, and the k largest workers
+            T = tasks[:k]            # sorted ascending
+            W = workers[m-k:]        # sorted ascending
+            rem = pills
+
+            # Try to assign from hardest→easiest
+            for req in reversed(T):
+                # 1) If our strongest remaining worker can do it unaided, use them.
+                if W and W[-1] >= req:
                     W.pop()
                 else:
-                    # 2) Otherwise we must use a pill.  Find the smallest w s.t. w+strength >= t
-                    if rem_pills == 0:
+                    # 2) Otherwise we must use a pill.
+                    if rem == 0:
                         return False
-                    need = t - strength
-                    # lower_bound on W
+                    # Find the *smallest* w in W s.t. w + strength >= req
+                    need = req - strength
                     i = bisect_left(W, need)
                     if i == len(W):
                         return False
-                    # give the pill to W[i]
+                    # Use that worker with a pill
                     W.pop(i)
-                    rem_pills -= 1
-            
+                    rem -= 1
+
             return True
-        
-        # Binary‑search the maximum k we can feasibly assign
-        lo, hi = 0, min(len(tasks), len(workers))
-        ans = 0
+
+        # Binary‑search the max k ∈ [0, min(n,m)] we can assign
+        lo, hi, ans = 0, min(n, m), 0
         while lo <= hi:
             mid = (lo + hi) // 2
             if can_assign(mid):
@@ -45,5 +49,5 @@ class Solution:
                 lo = mid + 1
             else:
                 hi = mid - 1
-        
+
         return ans
