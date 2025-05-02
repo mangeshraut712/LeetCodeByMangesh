@@ -3,26 +3,33 @@ from collections import deque
 
 class Solution:
     def pushDominoes(self, dominoes: str) -> str:
-        s = 'L' + dominoes + 'R'
-        n = len(s)
-        res = list(s)
+        res = []
+        r, dots = False, 0
+        for d in dominoes:
+            if d == ".":
+                dots += 1
+            elif d == "R":
+                if r:
+                    res.append("R"*(dots+1))
+                elif dots > 0:
+                    res.append("."*dots)
+                r, dots = True, 0
+            else: # d == "L"
+                if r:
+                    res.append("R")
+                    if dots > 0:
+                        res.append("R"*(dots//2))
+                        if dots % 2 == 1:
+                            res.append(".")
+                        res.append("L"*(dots//2))
+                    res.append("L")
+                    r, dots = False, 0
+                else:
+                    res.append("L"*(dots+1))
+                    dots = 0
 
-        left = 0
-        for right in range(1, n):
-            if s[right] == '.':
-                continue
-
-            if s[left] == s[right]:
-                for k in range(left + 1, right):
-                    res[k] = s[left]
-            elif s[left] == 'R' and s[right] == 'L':
-                l, r = left + 1, right - 1
-                while l < r:
-                    res[l] = 'R'
-                    res[r] = 'L'
-                    l += 1
-                    r -= 1
-
-            left = right
-
-        return ''.join(res[1:-1])
+        if r:
+            res.append("R"*(dots+1))
+        else:
+            res.append("."*dots)
+        return "".join(res)
