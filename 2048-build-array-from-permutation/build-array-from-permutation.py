@@ -1,8 +1,5 @@
+from typing import List
+
 class Solution:
-    def buildArray(self, nums):
-        n = len(nums)
-        for i in range(n):
-            nums[i] += (nums[nums[i]] % n) * n
-        for i in range(n):
-            nums[i] //= n
-        return nums
+    def buildArray(self, nums: List[int]) -> List[int]:
+        return [nums[nums[i]] for i in range(len(nums))]
