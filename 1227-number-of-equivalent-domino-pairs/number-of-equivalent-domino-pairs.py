@@ -1,18 +1,10 @@
-from typing import List
-from collections import defaultdict
-
 class Solution:
-    def numEquivDominoPairs(self, dominoes: List[List[int]]) -> int:
-        counts = defaultdict(int)
+    def numEquivDominoPairs(self, dominoes):
+        cnt = [0] * 100
+        ans = 0
         for a, b in dominoes:
-            # Normalize the domino by sorting the pair and converting to a tuple
-            normalized_domino = tuple(sorted((a, b)))
-            counts[normalized_domino] += 1
-
-        total_pairs = 0
-        # If a domino appears n times, the number of pairs is n * (n - 1) // 2
-        for count in counts.values():
-            if count > 1:
-                total_pairs += count * (count - 1) // 2
-
-        return total_pairs
+            # encode the unordered pair (a,b) as a two‐digit key 0…99
+            k = a * 10 + b if a <= b else b * 10 + a
+            ans += cnt[k]
+            cnt[k] += 1
+        return ans
