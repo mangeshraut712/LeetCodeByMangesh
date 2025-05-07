@@ -3,62 +3,37 @@ from typing import List
 
 class Solution:
     def minTimeToReach(self, moveTime: List[List[int]]) -> int:
-        n = len(moveTime); m = len(moveTime[0])
-        N = n * m
-        # flatten moveTime into a 1D list
-        mt = [0] * N
-        for i in range(n):
-            base = i * m
-            row = moveTime[i]
-            for j in range(m):
-                mt[base + j] = row[j]
+        n = len(moveTime)
+        m = len(moveTime[0])
 
-        INF = 10**18
-        dist = [INF] * N
-        dist[0] = 0
-        heap = [(0, 0)]
-        push, pop = heapq.heappush, heapq.heappop
-        end = N - 1
+        min_time = [[float('inf')] * m for _ in range(n)]
+        min_time[0][0] = 0
 
-        while heap:
-            t, u = pop(heap)
-            if u == end:
-                return t
-            if t > dist[u]:
+        pq = [(0, 0, 0)]
+
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+
+        while pq:
+            time_at_rc, r, c = heapq.heappop(pq)
+
+            if time_at_rc > min_time[r][c]:
                 continue
 
-            # try each of the 4 neighbors
-            # up
-            v = u - m
-            if v >= 0:
-                mv = mt[v]
-                nt = t + 1 if t >= mv else mv + 1
-                if nt < dist[v]:
-                    dist[v] = nt
-                    push(heap, (nt, v))
-            # down
-            v = u + m
-            if v < N:
-                mv = mt[v]
-                nt = t + 1 if t >= mv else mv + 1
-                if nt < dist[v]:
-                    dist[v] = nt
-                    push(heap, (nt, v))
-            # left
-            if u % m:
-                v = u - 1
-                mv = mt[v]
-                nt = t + 1 if t >= mv else mv + 1
-                if nt < dist[v]:
-                    dist[v] = nt
-                    push(heap, (nt, v))
-            # right
-            if u % m < m - 1:
-                v = u + 1
-                mv = mt[v]
-                nt = t + 1 if t >= mv else mv + 1
-                if nt < dist[v]:
-                    dist[v] = nt
-                    push(heap, (nt, v))
+            if r == n - 1 and c == m - 1:
+                return time_at_rc
 
-        return dist[end]
+            for dr, dc in directions:
+                nr, nc = r + dr, c + dc
+
+                if 0 <= nr < n and 0 <= nc < m:
+                    # The earliest time you can be at the neighbor cell (nr, nc)
+                    # is 1 second after the maximum of:
+                    # 1. The time you are at the current cell (r, c).
+                    # 2. The minimum time you can start moving TO cell (nr, nc).
+                    time_to_be_at_neighbor = max(time_at_rc, moveTime[nr][nc]) + 1
+
+                    if time_to_be_at_neighbor < min_time[nr][nc]:
+                        min_time[nr][nc] = time_to_be_at_neighbor
+                        heapq.heappush(pq, (time_to_be_at_neighbor, nr, nc))
+
+        return -1
