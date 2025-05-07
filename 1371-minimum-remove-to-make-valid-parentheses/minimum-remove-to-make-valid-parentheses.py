@@ -1,30 +1,20 @@
+from typing import List
+
 class Solution:
     def minRemoveToMakeValid(self, s: str) -> str:
-        res = []
-        ap = res.append
-        bal = 0
-
-        # First pass: drop invalid ')'
-        for c in s:
+        # mark removals directly on a single list
+        a = list(s)
+        st = []
+        ap, pp = st.append, st.pop
+        for i, c in enumerate(a):
             if c == '(':
-                bal += 1
-                ap(c)
+                ap(i)
             elif c == ')':
-                if bal:
-                    bal -= 1
-                    ap(c)
-            else:
-                ap(c)
-
-        # Second pass: drop excess '(' from the end
-        if bal:
-            out = []
-            ap2 = out.append
-            for c in reversed(res):
-                if c == '(' and bal:
-                    bal -= 1
+                if st:
+                    pp()
                 else:
-                    ap2(c)
-            return "".join(reversed(out))
-
-        return "".join(res)
+                    a[i] = ''      # mark unmatched ')'
+        # remove any unmatched '('
+        for i in st:
+            a[i] = ''
+        return ''.join(a)
