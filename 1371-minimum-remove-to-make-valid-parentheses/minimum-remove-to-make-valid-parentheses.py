@@ -1,3 +1,5 @@
+from typing import List
+
 class Solution:
     def minRemoveToMakeValid(self, s: str) -> str:
         a = list(s)
