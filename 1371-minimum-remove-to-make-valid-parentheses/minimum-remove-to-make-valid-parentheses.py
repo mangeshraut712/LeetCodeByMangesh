@@ -1,15 +1,16 @@
 class Solution:
     def minRemoveToMakeValid(self, s: str) -> str:
-        arr = list(s)
+        a = list(s)
         st = []
-        for i, c in enumerate(arr):
+        ap, pop = st.append, st.pop
+        for i, c in enumerate(a):
             if c == '(':
-                st.append(i)
+                ap(i)
             elif c == ')':
                 if st:
-                    st.pop()
+                    pop()
                 else:
-                    arr[i] = ''
+                    a[i] = ''
         for i in st:
-            arr[i] = ''
-        return ''.join(arr)
+            a[i] = ''
+        return ''.join(a)
