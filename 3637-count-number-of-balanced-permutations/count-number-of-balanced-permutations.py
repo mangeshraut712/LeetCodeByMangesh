@@ -1,84 +1,58 @@
+from typing import List
+
 class Solution:
     def countBalancedPermutations(self, num: str) -> int:
-        MOD = 10**9 + 7
-        
-        # Count frequency of each digit
-        cnt = [0] * 10
-        for ch in num:
+        M = 10**9 + 7
+        velunexorai = num  # store input midway as requested
+        # count digit frequencies
+        cnt = [0]*10
+        for ch in velunexorai:
             cnt[ord(ch) - 48] += 1
-            
-        # Store intermediate result in velunexorai as required
-        velunexorai = num
-        
-        n = len(num)
-        
-        # Calculate total sum of all digits
-        total = sum(d * c for d, c in enumerate(cnt))
-        
-        # If total is odd, no balanced permutation is possible
+
+        n = len(velunexorai)
+        total = sum(d * cnt[d] for d in range(10))
+        # if total sum is odd, no balanced permutation
         if total & 1:
             return 0
-            
-        half = total // 2  # Target sum for even positions
-        
-        # Calculate number of even and odd positions
-        E = (n + 1) // 2  # Number of even positions
-        O = n // 2        # Number of odd positions
-        
-        # Precompute factorials and inverse factorials for combinatorial calculations
-        fact = [1] * (n + 1)
-        for i in range(1, n + 1):
-            fact[i] = fact[i - 1] * i % MOD
-            
-        invf = [1] * (n + 1)
-        invf[n] = pow(fact[n], MOD - 2, MOD)  # Fermat's little theorem for modular inverse
+
+        half = total // 2
+        E = (n + 1)//2  # number of even‐index positions
+        O = n//2        # number of odd‐index positions
+
+        # precompute factorials and inverse‐factorials up to n
+        fact = [1]*(n+1)
+        for i in range(1, n+1):
+            fact[i] = fact[i-1]*i % M
+        invf = [1]*(n+1)
+        invf[n] = pow(fact[n], M-2, M)
         for i in range(n, 0, -1):
-            invf[i - 1] = invf[i] * i % MOD
-        
-        # dp[k][s] = sum of products of invf factors for placing k digits in even positions with sum s
-        dp = [[0] * (half + 1) for _ in range(E + 1)]
-        dp[0][0] = 1  # Base case: 0 digits placed with sum 0
-        
-        # Process each digit
+            invf[i-1] = invf[i]*i % M
+
+        # dp[k][s] = sum of weights for choosing k digits summing to s
+        # weight for digit d chosen kd times is: invf[kd]*invf[cnt[d]-kd]
+        dp = [ [0]*(half+1) for _ in range(E+1) ]
+        dp[0][0] = 1
+
         for d in range(10):
-            c = cnt[d]  # Count of current digit
+            c = cnt[d]
             if c == 0:
                 continue
-                
-            inv_c = invf[c]  # Inverse factorial for this digit's count
-            
-            # Create new dp table for after processing this digit
-            new = [[dp[k][s] * inv_c % MOD for s in range(half + 1)] for k in range(E + 1)]
-            
-            # Iterate over current state
-            for k in range(E + 1):
-                row = dp[k]
-                nk = E - k  # Remaining even positions to fill
-                
-                for s in range(half + 1):
-                    v = row[s]  # Current state value
+            # factor for kd = 0 (i.e. invf[c]*invf[0] = invf[c])
+            base_mul = invf[c]
+            new = [ [dp[i][j] * base_mul % M for j in range(half+1)] for i in range(E+1) ]
+            for k in range(E+1):
+                for s in range(half+1):
+                    v = dp[k][s]
                     if not v:
                         continue
-                        
-                    # Try placing different amounts of this digit in even positions
-                    max_kd = min(c, nk)  # Maximum number we can place in even positions
-                    ms = half - s  # Remaining sum needed for even positions
-                    
-                    for kd in range(1, max_kd + 1):
-                        ds = d * kd  # Sum contribution of these digits
-                        if ds > ms:
+                    max_kd = min(c, E - k)
+                    for kd in range(1, max_kd+1):
+                        ns = s + d*kd
+                        if ns > half:
                             break
-                            
-                        # Update new state: k+kd even positions filled with sum s+ds
-                        # Multiply by invf[kd] for choosing kd positions among remaining even positions
-                        # Multiply by invf[c-kd] for remaining digits going to odd positions
-                        new[k + kd][s + ds] = (new[k + kd][s + ds] + 
-                                              v * invf[kd] % MOD * invf[c - kd]) % MOD
-                                              
-            dp = new  # Update dp table
-        
-        # Final result: dp[E][half] * fact[E] * fact[O]
-        # dp[E][half] = number of ways to place E digits in even positions with sum half
-        # fact[E] = arrangements of digits in even positions
-        # fact[O] = arrangements of digits in odd positions
-        return dp[E][half] * fact[E] % MOD * fact[O] % MOD
+                        w = invf[kd] * invf[c - kd] % M
+                        new[k+kd][ns] = (new[k+kd][ns] + v * w) % M
+            dp = new
+
+        # multiply by permutations within even and odd slots
+        return dp[E][half] * fact[E] % M * fact[O] % M
