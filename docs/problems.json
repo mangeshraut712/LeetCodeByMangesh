@@ -1,0 +1,917 @@
+{
+  "count": 89,
+  "languages": {
+    "Python": 70,
+    "C++": 1,
+    "Java": 1,
+    "Swift": 4,
+    "SQL": 7,
+    "JavaScript": 4,
+    "C": 1
+  },
+  "topics": {
+    "DP & backtracking": 3,
+    "Trees": 6,
+    "Heaps": 3,
+    "Arrays & hashing": 45,
+    "SQL": 7,
+    "Strings": 11,
+    "Graphs": 4,
+    "Linked lists": 3,
+    "JavaScript": 4,
+    "Randomized": 3
+  },
+  "problems": [
+    {
+      "id": 10,
+      "slug": "10-regular-expression-matching",
+      "title": "Regular Expression Matching",
+      "topic": "DP & backtracking",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 100,
+      "slug": "100-same-tree",
+      "title": "Same Tree",
+      "topic": "Trees",
+      "langs": [
+        "C++"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 101,
+      "slug": "101-symmetric-tree",
+      "title": "Symmetric Tree",
+      "topic": "Trees",
+      "langs": [
+        "Java"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 1014,
+      "slug": "1014-k-closest-points-to-origin",
+      "title": "K Closest Points To Origin",
+      "topic": "Heaps",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 102,
+      "slug": "102-binary-tree-level-order-traversal",
+      "title": "Binary Tree Level Order Traversal",
+      "topic": "Trees",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 11,
+      "slug": "11-container-with-most-water",
+      "title": "Container With Most Water",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Swift"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 1179,
+      "slug": "1179-game-play-analysis-i",
+      "title": "Game Play Analysis I",
+      "topic": "SQL",
+      "langs": [
+        "SQL"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 12,
+      "slug": "12-integer-to-roman",
+      "title": "Integer To Roman",
+      "topic": "Strings",
+      "langs": [
+        "Swift"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 1227,
+      "slug": "1227-number-of-equivalent-domino-pairs",
+      "title": "Number Of Equivalent Domino Pairs",
+      "topic": "Strings",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 127,
+      "slug": "127-word-ladder",
+      "title": "Word Ladder",
+      "topic": "Graphs",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 13,
+      "slug": "13-roman-to-integer",
+      "title": "Roman To Integer",
+      "topic": "Strings",
+      "langs": [
+        "Swift"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 1300,
+      "slug": "1300-critical-connections-in-a-network",
+      "title": "Critical Connections In A Network",
+      "topic": "Graphs",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 1371,
+      "slug": "1371-minimum-remove-to-make-valid-parentheses",
+      "title": "Minimum Remove To Make Valid Parentheses",
+      "topic": "Strings",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 138,
+      "slug": "138-copy-list-with-random-pointer",
+      "title": "Copy List With Random Pointer",
+      "topic": "Linked lists",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 14,
+      "slug": "14-longest-common-prefix",
+      "title": "Longest Common Prefix",
+      "topic": "Strings",
+      "langs": [
+        "Python",
+        "Swift"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 1421,
+      "slug": "1421-find-numbers-with-even-number-of-digits",
+      "title": "Find Numbers With Even Number Of Digits",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 15,
+      "slug": "15-3sum",
+      "title": "3sum",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 1500,
+      "slug": "1500-count-largest-group",
+      "title": "Count Largest Group",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 16,
+      "slug": "16-3sum-closest",
+      "title": "3sum Closest",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 164,
+      "slug": "164-maximum-gap",
+      "title": "Maximum Gap",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 1656,
+      "slug": "1656-count-good-triplets",
+      "title": "Count Good Triplets",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 175,
+      "slug": "175-combine-two-tables",
+      "title": "Combine Two Tables",
+      "topic": "SQL",
+      "langs": [
+        "SQL"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 18,
+      "slug": "18-4sum",
+      "title": "4sum",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 184,
+      "slug": "184-department-highest-salary",
+      "title": "Department Highest Salary",
+      "topic": "SQL",
+      "langs": [
+        "SQL"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 185,
+      "slug": "185-department-top-three-salaries",
+      "title": "Department Top Three Salaries",
+      "topic": "SQL",
+      "langs": [
+        "SQL"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 196,
+      "slug": "196-delete-duplicate-emails",
+      "title": "Delete Duplicate Emails",
+      "topic": "SQL",
+      "langs": [
+        "SQL"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 197,
+      "slug": "197-rising-temperature",
+      "title": "Rising Temperature",
+      "topic": "SQL",
+      "langs": [
+        "SQL"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 200,
+      "slug": "200-number-of-islands",
+      "title": "Number Of Islands",
+      "topic": "Graphs",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 2048,
+      "slug": "2048-build-array-from-permutation",
+      "title": "Build Array From Permutation",
+      "topic": "Strings",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 207,
+      "slug": "207-course-schedule",
+      "title": "Course Schedule",
+      "topic": "Graphs",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 2180,
+      "slug": "2180-maximum-number-of-tasks-you-can-assign",
+      "title": "Maximum Number Of Tasks You Can Assign",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 22,
+      "slug": "22-generate-parentheses",
+      "title": "Generate Parentheses",
+      "topic": "DP & backtracking",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 2249,
+      "slug": "2249-count-the-hidden-sequences",
+      "title": "Count The Hidden Sequences",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 2277,
+      "slug": "2277-count-equal-and-divisible-pairs-in-an-array",
+      "title": "Count Equal And Divisible Pairs In An Array",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 2280,
+      "slug": "2280-count-good-triplets-in-an-array",
+      "title": "Count Good Triplets In An Array",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 236,
+      "slug": "236-lowest-common-ancestor-of-a-binary-tree",
+      "title": "Lowest Common Ancestor Of A Binary Tree",
+      "topic": "Trees",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 2394,
+      "slug": "2394-count-subarrays-with-score-less-than-k",
+      "title": "Count Subarrays With Score Less Than K",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 2395,
+      "slug": "2395-longest-binary-subsequence-less-than-or-equal-to-k",
+      "title": "Longest Binary Subsequence Less Than Or Equal To K",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 2415,
+      "slug": "2415-count-the-number-of-ideal-arrays",
+      "title": "Count The Number Of Ideal Arrays",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 2422,
+      "slug": "2422-query-kth-smallest-trimmed-number",
+      "title": "Query Kth Smallest Trimmed Number",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 25,
+      "slug": "25-reverse-nodes-in-k-group",
+      "title": "Reverse Nodes In K Group",
+      "topic": "Linked lists",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 2527,
+      "slug": "2527-count-subarrays-with-fixed-bounds",
+      "title": "Count Subarrays With Fixed Bounds",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 262,
+      "slug": "262-trips-and-users",
+      "title": "Trips And Users",
+      "topic": "SQL",
+      "langs": [
+        "SQL"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 2681,
+      "slug": "2681-put-marbles-in-bags",
+      "title": "Put Marbles In Bags",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 2699,
+      "slug": "2699-count-the-number-of-fair-pairs",
+      "title": "Count The Number Of Fair Pairs",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 2758,
+      "slug": "2758-check-if-object-instance-of-class",
+      "title": "Check If Object Instance Of Class",
+      "topic": "JavaScript",
+      "langs": [
+        "JavaScript"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 2762,
+      "slug": "2762-cache-with-time-limit",
+      "title": "Cache With Time Limit",
+      "topic": "JavaScript",
+      "langs": [
+        "JavaScript"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 2820,
+      "slug": "2820-return-length-of-arguments-passed",
+      "title": "Return Length Of Arguments Passed",
+      "topic": "JavaScript",
+      "langs": [
+        "JavaScript"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 2856,
+      "slug": "2856-count-complete-subarrays-in-an-array",
+      "title": "Count Complete Subarrays In An Array",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "README"
+      ],
+      "has_code": false
+    },
+    {
+      "id": 2859,
+      "slug": "2859-add-two-promises",
+      "title": "Add Two Promises",
+      "topic": "JavaScript",
+      "langs": [
+        "JavaScript"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 29,
+      "slug": "29-divide-two-integers",
+      "title": "Divide Two Integers",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 2915,
+      "slug": "2915-count-of-interesting-subarrays",
+      "title": "Count Of Interesting Subarrays",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 295,
+      "slug": "295-find-median-from-data-stream",
+      "title": "Find Median From Data Stream",
+      "topic": "Heaps",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 2998,
+      "slug": "2998-count-symmetric-integers",
+      "title": "Count Symmetric Integers",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "C"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 3,
+      "slug": "3-longest-substring-without-repeating-characters",
+      "title": "Longest Substring Without Repeating Characters",
+      "topic": "Strings",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 3001,
+      "slug": "3001-apply-operations-to-maximize-score",
+      "title": "Apply Operations To Maximize Score",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 3142,
+      "slug": "3142-longest-unequal-adjacent-groups-subsequence-ii",
+      "title": "Longest Unequal Adjacent Groups Subsequence II",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 3143,
+      "slug": "3143-longest-unequal-adjacent-groups-subsequence-i",
+      "title": "Longest Unequal Adjacent Groups Subsequence I",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 3171,
+      "slug": "3171-minimum-equal-sum-of-two-arrays-after-replacing-zeros",
+      "title": "Minimum Equal Sum Of Two Arrays After Replacing Zeros",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "README"
+      ],
+      "has_code": false
+    },
+    {
+      "id": 3213,
+      "slug": "3213-count-subarrays-where-max-element-appears-at-least-k-times",
+      "title": "Count Subarrays Where Max Element Appears At Least K Times",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 322,
+      "slug": "322-coin-change",
+      "title": "Coin Change",
+      "topic": "DP & backtracking",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 3243,
+      "slug": "3243-count-the-number-of-powerful-integers",
+      "title": "Count The Number Of Powerful Integers",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 34,
+      "slug": "34-find-first-and-last-position-of-element-in-sorted-array",
+      "title": "Find First And Last Position Of Element In Sorted Array",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 347,
+      "slug": "347-top-k-frequent-elements",
+      "title": "Top K Frequent Elements",
+      "topic": "Heaps",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 3548,
+      "slug": "3548-find-the-count-of-good-integers",
+      "title": "Find The Count Of Good Integers",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 3621,
+      "slug": "3621-minimum-operations-to-make-array-values-equal-to-k",
+      "title": "Minimum Operations To Make Array Values Equal To K",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 3627,
+      "slug": "3627-find-minimum-time-to-reach-last-room-i",
+      "title": "Find Minimum Time To Reach Last Room I",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 3628,
+      "slug": "3628-find-minimum-time-to-reach-last-room-ii",
+      "title": "Find Minimum Time To Reach Last Room II",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 3637,
+      "slug": "3637-count-number-of-balanced-permutations",
+      "title": "Count Number Of Balanced Permutations",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 3685,
+      "slug": "3685-count-subarrays-of-length-three-with-a-condition",
+      "title": "Count Subarrays Of Length Three With A Condition",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 3773,
+      "slug": "3773-minimum-pair-removal-to-sort-array-i",
+      "title": "Minimum Pair Removal To Sort Array I",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 382,
+      "slug": "382-linked-list-random-node",
+      "title": "Linked List Random Node",
+      "topic": "Linked lists",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 398,
+      "slug": "398-random-pick-index",
+      "title": "Random Pick Index",
+      "topic": "Randomized",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 4,
+      "slug": "4-median-of-two-sorted-arrays",
+      "title": "Median Of Two Sorted Arrays",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 42,
+      "slug": "42-trapping-rain-water",
+      "title": "Trapping Rain Water",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 53,
+      "slug": "53-maximum-subarray",
+      "title": "Maximum Subarray",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 54,
+      "slug": "54-spiral-matrix",
+      "title": "Spiral Matrix",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 543,
+      "slug": "543-diameter-of-binary-tree",
+      "title": "Diameter Of Binary Tree",
+      "topic": "Trees",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 6,
+      "slug": "6-zigzag-conversion",
+      "title": "Zigzag Conversion",
+      "topic": "Strings",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 7,
+      "slug": "7-reverse-integer",
+      "title": "Reverse Integer",
+      "topic": "Strings",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 718,
+      "slug": "718-maximum-length-of-repeated-subarray",
+      "title": "Maximum Length Of Repeated Subarray",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 769,
+      "slug": "769-largest-plus-sign",
+      "title": "Largest Plus Sign",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 797,
+      "slug": "797-rabbits-in-forest",
+      "title": "Rabbits In Forest",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 868,
+      "slug": "868-push-dominoes",
+      "title": "Push Dominoes",
+      "topic": "Strings",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 9,
+      "slug": "9-palindrome-number",
+      "title": "Palindrome Number",
+      "topic": "Strings",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 903,
+      "slug": "903-implement-rand10-using-rand7",
+      "title": "Implement Rand10 Using Rand7",
+      "topic": "Randomized",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 915,
+      "slug": "915-generate-random-point-in-a-circle",
+      "title": "Generate Random Point In A Circle",
+      "topic": "Randomized",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 948,
+      "slug": "948-sort-an-array",
+      "title": "Sort An Array",
+      "topic": "Arrays & hashing",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    },
+    {
+      "id": 98,
+      "slug": "98-validate-binary-search-tree",
+      "title": "Validate Binary Search Tree",
+      "topic": "Trees",
+      "langs": [
+        "Python"
+      ],
+      "has_code": true
+    }
+  ]
+}

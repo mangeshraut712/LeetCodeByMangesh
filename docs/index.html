@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LeetCode by Mangesh — Interview prep catalog</title>
+  <meta name="description" content="Python-first LeetCode solutions and interview prep by Mangesh Raut. One folder per problem." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f4f1ea;
+      --ink: #1c1914;
+      --muted: #6b6458;
+      --line: rgba(28, 25, 20, 0.12);
+      --card: #fffdf8;
+      --accent: #c45c26;
+      --code-bg: #1c1914;
+      --code-fg: #f4f1ea;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    a { color: inherit; }
+    header {
+      padding: 28px 48px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+    }
+    .mark {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .nav a {
+      margin-left: 20px;
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .nav a:hover, .nav a.active { color: var(--ink); }
+    .hero {
+      padding: 64px 48px 36px;
+      max-width: 1100px;
+    }
+    h1 {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-weight: 500;
+      font-size: clamp(40px, 5.4vw, 68px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin: 0 0 18px;
+    }
+    .lede {
+      max-width: 640px;
+      font-size: 18px;
+      color: var(--muted);
+      margin: 0;
+    }
+    .stats {
+      display: flex;
+      gap: 28px;
+      padding: 8px 48px 28px;
+      flex-wrap: wrap;
+    }
+    .stat strong {
+      display: block;
+      font-size: 28px;
+      font-family: "Source Serif 4", Georgia, serif;
+      font-weight: 600;
+    }
+    .stat span { font-size: 13px; color: var(--muted); }
+    .toolbar {
+      padding: 0 48px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .pill, .topic {
+      border: 1px solid var(--line);
+      background: transparent;
+      border-radius: 999px;
+      padding: 7px 14px;
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      color: var(--ink);
+    }
+    .topic.active, .pill.active {
+      background: var(--ink);
+      color: var(--bg);
+      border-color: var(--ink);
+    }
+    .search {
+      margin-left: auto;
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font: inherit;
+      min-width: 220px;
+    }
+    .grid {
+      padding: 8px 48px 64px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 18px 14px;
+      text-decoration: none;
+      display: block;
+      min-height: 118px;
+    }
+    .card .id {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 12px;
+      color: var(--accent);
+    }
+    .card h3 {
+      margin: 6px 0 10px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .panel {
+      display: none;
+      padding: 8px 48px 72px;
+    }
+    .panel.visible { display: block; }
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .box {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .box h2 {
+      margin: 0;
+      padding: 18px 20px 0;
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 28px;
+      font-weight: 500;
+    }
+    .box p.approach {
+      margin: 8px 20px 16px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    pre {
+      margin: 0;
+      padding: 20px;
+      background: var(--code-bg);
+      color: var(--code-fg);
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 12.5px;
+      line-height: 1.55;
+      overflow: auto;
+      min-height: 280px;
+    }
+    .run {
+      padding: 16px 20px 20px;
+    }
+    label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 6px; }
+    input[type="text"] {
+      width: 100%;
+      font: inherit;
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      margin-bottom: 10px;
+    }
+    button.run-btn {
+      background: var(--ink);
+      color: var(--bg);
+      border: 0;
+      border-radius: 999px;
+      padding: 9px 16px;
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .out {
+      margin-top: 12px;
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 13px;
+      background: #efe8d8;
+      border-radius: 10px;
+      padding: 12px;
+      min-height: 48px;
+      white-space: pre-wrap;
+    }
+    footer {
+      padding: 0 48px 40px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 900px) {
+      header, .hero, .stats, .toolbar, .grid, .panel, footer { padding-left: 20px; padding-right: 20px; }
+      .split { grid-template-columns: 1fr; }
+      .search { margin-left: 0; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="mark">LeetCode by Mangesh Raut</div>
+    <nav class="nav">
+      <a href="#catalog" id="link-catalog" class="active">Catalog</a>
+      <a href="#solution" id="link-solution">Featured solution</a>
+      <a href="https://github.com/mangeshraut712/LeetCodeByMangesh">GitHub</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="catalog-hero">
+    <h1>Python interview prep,<br />one problem per folder.</h1>
+    <p class="lede">
+      Worked LeetCode solutions for coding interviews: README, approach notes, and runnable Python
+      (plus a few SQL, Swift, and JS files). Browse by topic, then open the source on GitHub.
+    </p>
+  </section>
+
+  <div class="stats" id="stats"></div>
+  <div class="toolbar" id="toolbar"></div>
+  <div class="grid" id="grid"></div>
+
+  <section class="panel" id="solution">
+    <div class="split">
+      <article class="box">
+        <h2>15. 3Sum</h2>
+        <p class="approach">
+          Sort, then fix one number and two-pointer the rest. Skip duplicates so each triplet is unique.
+          O(n²) after the sort — the same method as in <code>15-3sum/3sum.py</code>.
+        </p>
+        <pre id="code-3sum"></pre>
+      </article>
+      <article class="box">
+        <h2>Try it</h2>
+        <div class="run">
+          <label for="nums">nums (JSON array)</label>
+          <input id="nums" type="text" value="[-1,0,1,2,-1,-4]" />
+          <button class="run-btn" id="run-3sum" type="button">Run 3Sum</button>
+          <div class="out" id="out-3sum">Output will appear here.</div>
+          <p class="approach" style="margin:18px 0 8px;padding:0;">
+            Coin Change (322) uses BFS on remaining amount for fewest coins — see
+            <code>322-coin-change/coin-change.py</code>.
+          </p>
+          <label for="coins">coins, amount</label>
+          <input id="coins" type="text" value="[1,2,5], 11" />
+          <button class="run-btn" id="run-cc" type="button">Run Coin Change</button>
+          <div class="out" id="out-cc">Output will appear here.</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    Local catalog of this repo — not affiliated with LeetCode. Counts come from folders in the tree, not a public LeetCode profile.
+  </footer>
+
+  <script>
+    const CODE_3SUM = `from typing import List
+
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        result = []
+        n = len(nums)
+        for i in range(n - 2):
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+            left, right = i + 1, n - 1
+            target = -nums[i]
+            while left < right:
+                current_sum = nums[left] + nums[right]
+                if current_sum == target:
+                    result.append([nums[i], nums[left], nums[right]])
+                    while left < right and nums[left] == nums[left + 1]:
+                        left += 1
+                    while left < right and nums[right] == nums[right - 1]:
+                        right -= 1
+                    left += 1
+                    right -= 1
+                elif current_sum < target:
+                    left += 1
+                else:
+                    right -= 1
+        return result`;
+
+    function threeSum(nums) {
+      const a = [...nums].sort((x, y) => x - y);
+      const result = [];
+      const n = a.length;
+      for (let i = 0; i < n - 2; i++) {
+        if (i > 0 && a[i] === a[i - 1]) continue;
+        let left = i + 1, right = n - 1;
+        const target = -a[i];
+        while (left < right) {
+          const sum = a[left] + a[right];
+          if (sum === target) {
+            result.push([a[i], a[left], a[right]]);
+            while (left < right && a[left] === a[left + 1]) left++;
+            while (left < right && a[right] === a[right - 1]) right--;
+            left++;
+            right--;
+          } else if (sum < target) left++;
+          else right--;
+        }
+      }
+      return result;
+    }
+
+    function coinChange(coins, amount) {
+      if (amount === 0) return 0;
+      const queue = [[amount, 0]];
+      const visited = new Set([amount]);
+      while (queue.length) {
+        const [remaining, num] = queue.shift();
+        for (const coin of coins) {
+          const next = remaining - coin;
+          if (next < 0) continue;
+          if (next === 0) return num + 1;
+          if (!visited.has(next)) {
+            visited.add(next);
+            queue.push([next, num + 1]);
+          }
+        }
+      }
+      return -1;
+    }
+
+    document.getElementById("code-3sum").textContent = CODE_3SUM;
+
+    function showView() {
+      const featured = location.hash === "#solution";
+      document.getElementById("solution").classList.toggle("visible", featured);
+      document.getElementById("grid").style.display = featured ? "none" : "grid";
+      document.getElementById("toolbar").style.display = featured ? "none" : "flex";
+      document.getElementById("stats").style.display = featured ? "none" : "flex";
+      document.getElementById("catalog-hero").style.display = featured ? "none" : "block";
+      document.getElementById("link-catalog").classList.toggle("active", !featured);
+      document.getElementById("link-solution").classList.toggle("active", featured);
+    }
+    window.addEventListener("hashchange", showView);
+    showView();
+
+    document.getElementById("run-3sum").addEventListener("click", () => {
+      try {
+        const nums = JSON.parse(document.getElementById("nums").value);
+        document.getElementById("out-3sum").textContent = JSON.stringify(threeSum(nums));
+      } catch (err) {
+        document.getElementById("out-3sum").textContent = String(err);
+      }
+    });
+    document.getElementById("run-cc").addEventListener("click", () => {
+      try {
+        const raw = document.getElementById("coins").value;
+        const m = raw.match(/^(.*),\s*(-?\d+)\s*$/);
+        if (!m) throw new Error("Use: [1,2,5], 11");
+        const coins = JSON.parse(m[1]);
+        const amount = Number(m[2]);
+        document.getElementById("out-cc").textContent = String(coinChange(coins, amount));
+      } catch (err) {
+        document.getElementById("out-cc").textContent = String(err);
+      }
+    });
+
+    let catalog = { problems: [], count: 0, languages: {}, topics: {} };
+    let activeTopic = "All";
+
+    function render() {
+      const q = (document.getElementById("q")?.value || "").toLowerCase();
+      const problems = catalog.problems.filter((p) => {
+        const topicOk = activeTopic === "All" || p.topic === activeTopic;
+        const text = `${p.id} ${p.title} ${p.slug}`.toLowerCase();
+        return topicOk && text.includes(q);
+      }).sort((a, b) => a.id - b.id);
+
+      const grid = document.getElementById("grid");
+      grid.innerHTML = problems.map((p) => {
+        const href = `https://github.com/mangeshraut712/LeetCodeByMangesh/tree/main/${p.slug}`;
+        return `<a class="card" href="${href}">
+          <div class="id">#${p.id}</div>
+          <h3>${p.title}</h3>
+          <div class="meta"><span>${p.topic}</span><span>${p.langs.join(" · ")}</span></div>
+        </a>`;
+      }).join("");
+    }
+
+    fetch("./problems.json")
+      .then((r) => r.json())
+      .then((data) => {
+        catalog = data;
+        const py = data.languages.Python || 0;
+        document.getElementById("stats").innerHTML = `
+          <div class="stat"><strong>${data.count}</strong><span>problem folders</span></div>
+          <div class="stat"><strong>${py}</strong><span>Python solutions</span></div>
+          <div class="stat"><strong>${Object.keys(data.topics).length}</strong><span>topic groups</span></div>`;
+        const topics = ["All", ...Object.keys(data.topics).sort()];
+        const bar = document.getElementById("toolbar");
+        bar.innerHTML = topics.map((t) => {
+          const n = t === "All" ? data.count : data.topics[t];
+          return `<button type="button" class="topic${t === "All" ? " active" : ""}" data-topic="${t}">${t} (${n})</button>`;
+        }).join("") + `<input class="search" id="q" placeholder="Filter problems" />`;
+        bar.querySelectorAll(".topic").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            activeTopic = btn.dataset.topic;
+            bar.querySelectorAll(".topic").forEach((b) => b.classList.toggle("active", b === btn));
+            render();
+          });
+        });
+        document.getElementById("q").addEventListener("input", render);
+        render();
+      });
+  </script>
+</body>
+</html>
